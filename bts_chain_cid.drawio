@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2021-10-14T15:17:10.707Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15" etag="O2Rcysloil7SIMEBV6tW" version="15.5.2" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-14T15:46:45.722Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15" etag="auiAFd-Uz13ECs06AgT3" version="15.5.2" type="github">
   <diagram id="CjfQBDizP03ljIALrH3r" name="Page-1">
     <mxGraphModel dx="786" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="fhI_MAW543BDFD8Se3oL-212" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="80" y="1010" width="640" height="630" as="geometry" />
+          <mxGeometry x="80" y="1010" width="640" height="550" as="geometry" />
         </mxCell>
         <mxCell id="fhI_MAW543BDFD8Se3oL-78" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
           <mxGeometry x="90" y="30" width="657.5" height="520" as="geometry" />
@@ -185,37 +185,13 @@
           <mxGeometry x="511.25" y="800" width="94.5" height="30" as="geometry" />
         </mxCell>
         <mxCell id="fhI_MAW543BDFD8Se3oL-112" value="哈希路由" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="511.25" y="843" width="94.5" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-113" value="数据操作模块" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="159" y="840" width="94.5" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-116" value="哈希算法" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="317.5" y="843" width="94.5" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-119" value="存储接入网关" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="159" y="800" width="94.5" height="30" as="geometry" />
+          <mxGeometry x="511.25" y="840" width="94.5" height="30" as="geometry" />
         </mxCell>
         <mxCell id="fhI_MAW543BDFD8Se3oL-120" value="订阅发布" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
           <mxGeometry x="511" y="920" width="94.5" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-121" value="目录索引" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="317.5" y="807" width="94.5" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-122" value="上链锚定" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="317.5" y="880" width="94.5" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-123" value="证书管理" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="317.5" y="920" width="94.5" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-128" value="数据监控模块" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="161.5" y="880" width="94.5" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-129" value="数据存储模块" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="162.5" y="920" width="94.5" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="fhI_MAW543BDFD8Se3oL-130" value="订阅发布" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
-          <mxGeometry x="511" y="883" width="94.5" height="30" as="geometry" />
+          <mxGeometry x="511" y="880" width="94.5" height="30" as="geometry" />
         </mxCell>
         <mxCell id="fhI_MAW543BDFD8Se3oL-141" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=2;startWidth=39;startSize=18;width=24;endWidth=39;endSize=18;" edge="1" parent="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
@@ -237,7 +213,7 @@
         <mxCell id="fhI_MAW543BDFD8Se3oL-133" value="前一交易&lt;br&gt;区块哈希" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-150">
           <mxGeometry x="7.596038774533271" y="10" width="61.72959550023935" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-134" value="校验位" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-150">
+        <mxCell id="fhI_MAW543BDFD8Se3oL-134" value="数据哈希&lt;br&gt;校验位" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-150">
           <mxGeometry x="86.28949258018191" y="10" width="61.72959550023935" height="50" as="geometry" />
         </mxCell>
         <mxCell id="fhI_MAW543BDFD8Se3oL-135" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;strokeWidth=2;" edge="1" parent="fhI_MAW543BDFD8Se3oL-150" source="fhI_MAW543BDFD8Se3oL-133" target="fhI_MAW543BDFD8Se3oL-134">
@@ -267,7 +243,7 @@
         <mxCell id="fhI_MAW543BDFD8Se3oL-164" value="前一交易&lt;br&gt;区块哈希" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-162">
           <mxGeometry x="7.794741503111539" y="10" width="63.344363331737675" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-165" value="校验位" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-162">
+        <mxCell id="fhI_MAW543BDFD8Se3oL-165" value="数据哈希&lt;br&gt;校验位" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-162">
           <mxGeometry x="88.54671613212064" y="10" width="63.344363331737675" height="50" as="geometry" />
         </mxCell>
         <mxCell id="fhI_MAW543BDFD8Se3oL-166" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;strokeWidth=2;" edge="1" parent="fhI_MAW543BDFD8Se3oL-162" source="fhI_MAW543BDFD8Se3oL-164" target="fhI_MAW543BDFD8Se3oL-165">
@@ -297,7 +273,7 @@
         <mxCell id="fhI_MAW543BDFD8Se3oL-173" value="前一交易&lt;br&gt;区块哈希" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-171">
           <mxGeometry x="7.716610818573482" y="10" width="62.70943034944949" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="fhI_MAW543BDFD8Se3oL-174" value="校验位" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-171">
+        <mxCell id="fhI_MAW543BDFD8Se3oL-174" value="数据哈希&lt;br&gt;校验位" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-171">
           <mxGeometry x="87.65916706558161" y="10" width="62.70943034944949" height="50" as="geometry" />
         </mxCell>
         <mxCell id="fhI_MAW543BDFD8Se3oL-175" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=none;endFill=0;strokeWidth=2;" edge="1" parent="fhI_MAW543BDFD8Se3oL-171" source="fhI_MAW543BDFD8Se3oL-173" target="fhI_MAW543BDFD8Se3oL-174">
@@ -424,6 +400,51 @@
           <mxGeometry x="-0.0098" y="1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-113" value="数据操作模块" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="152" y="840" width="128" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-116" value="多重哈希模块" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="300" y="840" width="128" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-119" value="存储接入网关" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="152" y="800" width="128" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-121" value="目录索引模块" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="300" y="800" width="128" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-122" value="上链锚定模块" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="300" y="880" width="128" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-123" value="证书管理模块" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="300" y="920" width="128" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-128" value="数据监控模块" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="152" y="880" width="128" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-129" value="数据存储模块" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;" vertex="1" parent="1">
+          <mxGeometry x="152" y="920" width="128" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-215" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="120" y="1020" width="560" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-220" value="存储资源管理" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;verticalAlign=middle;labelPosition=center;verticalLabelPosition=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="296.38" y="1030" width="85.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-221" value="服务接入认证" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;verticalAlign=middle;labelPosition=center;verticalLabelPosition=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="202.63" y="1030" width="85.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-222" value="数据资产管理" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;verticalAlign=middle;labelPosition=center;verticalLabelPosition=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="393.13" y="1030" width="85.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-223" value="访问授权管理" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;verticalAlign=middle;labelPosition=center;verticalLabelPosition=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="488.88" y="1030" width="85.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-224" value="资产凭证管理" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;verticalAlign=middle;labelPosition=center;verticalLabelPosition=middle;align=center;" vertex="1" parent="1">
+          <mxGeometry x="582.88" y="1030" width="85.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-225" value="存储合约" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="131.38" y="1035" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
