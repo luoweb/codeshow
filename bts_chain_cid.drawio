@@ -1,1 +1,100 @@
-<mxfile host="app.diagrams.net" modified="2021-10-14T01:23:59.654Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15" version="15.5.2" etag="i8AEQiHBrpcg77Kw5WUj" type="github"><diagram id="CjfQBDizP03ljIALrH3r">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-10-14T03:23:30.582Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15" etag="h72QftWLrZX6BWQx0cll" version="15.5.2" type="github">
+  <diagram id="CjfQBDizP03ljIALrH3r" name="Page-1">
+    <mxGraphModel dx="786" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fhI_MAW543BDFD8Se3oL-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1.007;entryY=0.173;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="fhI_MAW543BDFD8Se3oL-3" target="fhI_MAW543BDFD8Se3oL-67">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-71" value="加密存储" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="fhI_MAW543BDFD8Se3oL-70">
+          <mxGeometry x="0.3754" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-3" value="区块链网络" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/cryptocurrency-blockchain-fintech-free/32/Cryptocurrency_blockchain_data-37-128.png" vertex="1" parent="1">
+          <mxGeometry x="477" y="230" width="128" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.93;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="fhI_MAW543BDFD8Se3oL-5" target="fhI_MAW543BDFD8Se3oL-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="155" />
+              <mxPoint x="290" y="285" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-62" value="获取数据文件数字指纹" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="fhI_MAW543BDFD8Se3oL-59">
+          <mxGeometry x="0.3821" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="fhI_MAW543BDFD8Se3oL-5" target="fhI_MAW543BDFD8Se3oL-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-72" value="存储合约" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="fhI_MAW543BDFD8Se3oL-60">
+          <mxGeometry x="0.0295" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-5" value="可信存储服务" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#333333;gradientDirection=north;fillColor=#f5f5f5;strokeColor=#666666;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.elastic_file_system;" vertex="1" parent="1">
+          <mxGeometry x="320" y="96.8" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-4" value="" style="aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#ffffff;fontSize=12;spacingTop=3;image;image=img/lib/ibm/blockchain/smart_contract.svg;imageBackground=default;" vertex="1" parent="1">
+          <mxGeometry x="450" y="264" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1.038;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="fhI_MAW543BDFD8Se3oL-8" target="fhI_MAW543BDFD8Se3oL-65">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="258" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-77" value="哈希索引" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="fhI_MAW543BDFD8Se3oL-68">
+          <mxGeometry x="-0.1347" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-8" value="数字指纹" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn3.iconfinder.com/data/icons/file-set-volume-1/512/Artboard_12-128.png" vertex="1" parent="1">
+          <mxGeometry x="28" y="405" width="89" height="89" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="fhI_MAW543BDFD8Se3oL-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="73" y="171.60000000000002" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="fhI_MAW543BDFD8Se3oL-9" target="fhI_MAW543BDFD8Se3oL-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-63" value="获取公钥信息" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.133;entryY=0.983;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="fhI_MAW543BDFD8Se3oL-9" target="fhI_MAW543BDFD8Se3oL-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-9" value="用户及持有密钥" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=#666666;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;shape=mxgraph.mscae.enterprise.user_permissions;fillColor=#f5f5f5;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="49" y="260" width="47" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="fhI_MAW543BDFD8Se3oL-54" target="fhI_MAW543BDFD8Se3oL-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-61" value="存储数据文件" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="fhI_MAW543BDFD8Se3oL-55">
+          <mxGeometry x="0.0051" y="4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-54" value="数据文件" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=#666666;fillColor=#f5f5f5;shape=mxgraph.azure.file_2;pointerEvents=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="44.13" y="100" width="56.75" height="71.6" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-64" value="数据文件哈希索引" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="258" y="396.5" width="140" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-65" value="数据文件哈希加密分片1" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-64">
+          <mxGeometry y="26" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-67" value="数据文件哈希加密分片2&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-64">
+          <mxGeometry y="52" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fhI_MAW543BDFD8Se3oL-66" value="数据文件哈希加密分片3" style="text;strokeColor=default;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="fhI_MAW543BDFD8Se3oL-64">
+          <mxGeometry y="78" width="140" height="26" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
