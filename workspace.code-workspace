@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../ipfs/IPFS-For-Chinese"
+		},
+		{
+			"path": "../block"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}

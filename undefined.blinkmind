@@ -1,0 +1,126 @@
+{
+  "rootTopicKey": "45bb2e0c-2e9b-4513-a7b3-cb7b7b631c9e",
+  "editorRootTopicKey": "45bb2e0c-2e9b-4513-a7b3-cb7b7b631c9e",
+  "focusKey": "98de56b2-ba17-4f09-a481-7406caabbe04",
+  "extData": {
+    "TAGS": {
+      "tags": {
+        "test": {
+          "name": "test",
+          "style": "{\"backgroundColor\":\"grey\",\"color\":\"black\"}",
+          "topicKeys": []
+        }
+      }
+    }
+  },
+  "topics": [
+    {
+      "key": "45bb2e0c-2e9b-4513-a7b3-cb7b7b631c9e",
+      "parentKey": null,
+      "subKeys": [
+        "98de56b2-ba17-4f09-a481-7406caabbe04",
+        "48077c30-1af7-435a-a324-677b7f532f4f"
+      ],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "RootTopic"
+        }
+      ]
+    },
+    {
+      "key": "98de56b2-ba17-4f09-a481-7406caabbe04",
+      "parentKey": "45bb2e0c-2e9b-4513-a7b3-cb7b7b631c9e",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "test"
+        }
+      ]
+    },
+    {
+      "key": "48077c30-1af7-435a-a324-677b7f532f4f",
+      "parentKey": "45bb2e0c-2e9b-4513-a7b3-cb7b7b631c9e",
+      "subKeys": [],
+      "collapse": false,
+      "style": null,
+      "blocks": [
+        {
+          "type": "CONTENT",
+          "data": "\ntest"
+        }
+      ]
+    }
+  ],
+  "config": {
+    "readOnly": false,
+    "allowUndo": true,
+    "layoutDir": 2,
+    "theme": {
+      "name": "theme1",
+      "randomColor": false,
+      "background": "rgb(250,245,205)",
+      "highlightColor": "#50C9CE",
+      "marginH": 50,
+      "marginV": 30,
+      "contentStyle": {
+        "lineHeight": "1.5"
+      },
+      "linkStyle": {
+        "lineRadius": 5
+      },
+      "rootTopic": {
+        "contentStyle": {
+          "background": "rgb(221, 170, 68)",
+          "color": "#fff",
+          "fontSize": "34px",
+          "borderRadius": "5px",
+          "padding": "16px 18px 16px 18px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "2px",
+          "lineColor": "rgb(221, 170, 68)"
+        }
+      },
+      "primaryTopic": {
+        "contentStyle": {
+          "background": "#e8eaec",
+          "borderWidth": "2px",
+          "borderStyle": "solid",
+          "borderColor": "rgb(221, 170, 68)",
+          "borderRadius": "5px",
+          "fontSize": "17px",
+          "padding": "10px 15px 10px 15px"
+        },
+        "subLinkStyle": {
+          "lineType": "curve",
+          "lineWidth": "2px",
+          "lineColor": "rgb(221, 170, 68)"
+        }
+      },
+      "normalTopic": {
+        "contentStyle": {
+          "background": "#fff",
+          "border": "1px solid #e8eaec",
+          "borderRadius": "20px",
+          "color": "rgb(187, 136, 34)",
+          "fontSize": "13px",
+          "padding": "4px 10px"
+        },
+        "subLinkStyle": {
+          "lineType": "round",
+          "lineRadius": 5,
+          "lineWidth": "1px",
+          "lineColor": "rgb(187, 136, 34)"
+        }
+      }
+    }
+  },
+  "formatVersion": null
+}
