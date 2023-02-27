@@ -1,3 +1,3 @@
-module github.com/luoweb/chart
+module github.com/luoweb/codeshow
 
 go 1.13
