@@ -1,10 +1,10 @@
-# ipfs network
+# IPFS网络模块
 ipfs的网络管理主要基于libp2p模块进行构建，节点发现用来发现P2P网络中的其它节点及维护节点在线状态，并且根据节点状态调整网络连接，构建稳定的网络拓扑。
 
 ## 目录
-<!-- TOC depthfrom:2 -->
+<!-- TOC depthfrom:3 -->
 
-- [ipfs network](#ipfs-network)
+- [IPFS网络模块](#ipfs网络模块)
   - [目录](#目录)
   - [网络配置和节点发现配置](#网络配置和节点发现配置)
     - [网络节点配置bootstrap](#网络节点配置bootstrap)
@@ -26,7 +26,7 @@ ipfs的网络管理主要基于libp2p模块进行构建，节点发现用来发�
 
 ### 网络节点配置bootstrap
 #### 节点监听(address)
-1. 节点配置，网络组网主要涉及swarm地址列表，支持tcp,udp,quic等协议
+1. 节点配置，网络组网主要涉及swarm地址列表，支持tcp,udp,quic,webrtc,webtransport等协议，并原生支持ipv4和ipv6
 ```json
 "Addresses": {
     "API": "/ip4/127.0.0.1/tcp/5001",
@@ -46,7 +46,9 @@ ipfs的网络管理主要基于libp2p模块进行构建，节点发现用来发�
     ]
 },
 ```
- 
+基于multiaddress统一地址描述，[Addressing](https://github.com/libp2p/specs/blob/master/addressing/README.md)
+
+
 2. 监听启动日志分析如下：
 ```bash
 Initializing daemon...
@@ -103,8 +105,7 @@ func (p2p *P2P) ForwardLocal(ctx context.Context, peer peer.ID, proto protocol.I
 	return listener, nil
 }
 ```
-
-
+引用[go-multiaddr](github.com/multiformats/go-multiaddr)
 
 #### 初始化节点组网配置(bootstrap)：静态寻址
 > IPFS节点在启动之前需要配置它的Bootstrap节点，配置文件中相关配置如下图所示，Bootstrap配置中配置了IPFS节点启动时需要连接的所有种子节点列表，这些节点地址列表信息是默认的，如果需要搭建IPFS私有网络可以修改成自己的种子节点列表（Qm开头的字符串是IPFS的节点id）。默认提供的种子节点都是具有公网地址的节点，IPFS节点启动的时候首先连接该种子节点，后续通过该种子节点去发现IPFS网络中更多的节点，从而进行连接，也就是DHT组网阶段。
@@ -119,8 +120,6 @@ func (p2p *P2P) ForwardLocal(ctx context.Context, peer peer.ID, proto protocol.I
     "/ip4/104.131.131.82/udp/4001/quic/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ"
 ],
 ```
-
-
 ### 网络组网swarm
 
 > IPFS节点连接种子节点成功以后则去通过DHT去发现其他节点，发现其他节点之后则尝试进行连接，连接成功的节点会加入到该节点的节点列表，以便后续可以直接与该节点通信，考虑到全世界的IPFS节点规模很大，不可能每个节点和其他节点保持长连接，所以对每个节点的连接数量做了限制，一般节点连接数量都在1千以下（IPFS配置文件中可以配置），对于没有连接的节点需要通信的话，可以通过DHT找到该节点地址，然后连接该节点进行通信，这样就构成了大规模的分布式节点网络。
@@ -162,6 +161,8 @@ func (p2p *P2P) ForwardLocal(ctx context.Context, peer peer.ID, proto protocol.I
 
 ## 数据交换：
 IPFS文件内容存储在不同的节点上，每个节点存储root block，少量节点存储完整文件数据，大部分节点存储部分文件block。因为block分散存储在不同节点，Bitswap协议解决了从多个节点高效获取全部数据块的问题。
+[BitSwap概念](https://docs.ipfs.tech/concepts/bitswap/)
+[BitSwap请求处理流程](../assets/diagram-of-the-want-have-want-block-process.6ef862a2.png)
 
 ```bash
 (base) ➜  ipfs git:(master) ✗ ipfs bitswap ledger 12D3KooWDfSjDMZXY5oaxmw2Sm3PqmsE7S3s9rqEDPY7x8ARQQR6
@@ -190,10 +191,14 @@ DHT lan (1 peers):
   @ 12D3KooWDfSjDMZXY5oaxmw2Sm3PqmsE7S3s9rqEDPY7x8ARQQR6  2s ago       2s ago        kubo/0.18.1/desktop
 ```
 
-## libp2p网络监控
+1. BitSwap核心实现[core/node/bitswap.go](https://github.com/ipfs/kubo/blob/master/core/node/bitswap.go)
+2. BitSwap命令行入口 [core/commands/bitswap.go](https://github.com/ipfs/kubo/blob/master/core/commands/bitswap.go)
 
+## libp2p网络监控
+libp2p由于节点的分散性且整体的数据可能在整个网络流动，需要对整体的网络资源使用情况进行监控
 
 ### 网络延迟检测
+libp2p存在网络延迟检测，详见webui节点详情页面，libp2p的ping 协议与传统ping命令行（基于ICMP)不同，因为它需要已经建立的 libp2p 连接
 ```bash
 (base) ➜  ipfs git:(master) ✗ ipfs ping -n 5 /p2p/12D3KooWDQY855Ar1afzd1HDTFJQBE9rPnRPsM9SmxHuR6PxEJvT
 PING 12D3KooWDQY855Ar1afzd1HDTFJQBE9rPnRPsM9SmxHuR6PxEJvT.
@@ -204,6 +209,9 @@ Pong received: time=0.52 ms
 Pong received: time=1.11 ms
 Average latency: 0.96ms
 ```
+1. ping command[core/commands/ping.go](../core/commands/ping.go)
+
+
 ### 带宽占用监控
 ```Bash
 (base) ➜  ipfs git:(master) ✗ ipfs stats bw
@@ -213,20 +221,23 @@ TotalOut: 17 MB
 RateIn: 0 B/s
 RateOut: 0 B/s
 ```
+1. ipfs stat bandwith[core/commands/stat.go](https://github.com/ipfs/kubo/blob/master/core/commands/stat.go)
+ 
 
 ### 网络资源管理
- DHT节点发现代码实现[core/coreapi/dht.go](https://github.com/ipfs/kubo/blob/master/docs/libp2p-resource-management.
+ DHT节点发现代码实现[core/coreapi/dht.go](https://github.com/ipfs/kubo/blob/master/docs/libp2p-resource-management.md)
  
 ### 系统监控
-http://127.0.0.1:5001/debug/pprof/
-http://127.0.0.1:5001/debug/metrics/prometheus
-
-
+1. ipfs pprof[profile/profile.go](https://github.com/ipfs/kubo/blob/master/profile/profile.go)
+访问地址：http://127.0.0.1:5001/debug/pprof/
+1. ipfs prometheus metrics[core/corehttp/metrics.go](https://github.com/ipfs/kubo/blob/master/core/corehttp/metrics.go)
+访问地址：http://127.0.0.1:5001/debug/metrics/prometheus
 
 
 ## 参考资料
-
-1. [IPFS网络组网解析](https://tech.hyperchain.cn/ipfs-4/) 
-2. [揭秘IPFS数据交换模块Bitswap](https://mp.weixin.qq.com/s?__biz=Mzg2MDA2NzQwNw==&mid=2247484025&idx=1&sn=691e344491c16a3c3f120de48f386f77&scene=21#wechat_redirect)
-3. [更通用的P2P网络协议栈——Libp2p](https://tech.hyperchain.cn/bitxmesh/)
-4. [P2P传输的开源库:Libjingle库 综述](https://blog.51cto.com/iteyer/3240049)
+1. [libp2p官网](https://libp2p.io/)
+2. [libp2p官方文档介绍](https://docs.libp2p.io/concepts/introduction/overview/)
+3. [IPFS网络组网解析](https://tech.hyperchain.cn/ipfs-4/) 
+4. [揭秘IPFS数据交换模块Bitswap](https://mp.weixin.qq.com/s?__biz=Mzg2MDA2NzQwNw==&mid=2247484025&idx=1&sn=691e344491c16a3c3f120de48f386f77&scene=21#wechat_redirect)
+5. [更通用的P2P网络协议栈——Libp2p](https://tech.hyperchain.cn/bitxmesh/)
+6. [P2P传输的开源库:Libjingle库 综述](https://blog.51cto.com/iteyer/3240049)
