@@ -8,6 +8,12 @@
 	- [目录](#目录)
 	- [纠删码简介](#纠删码简介)
 	- [纠删码相关代码](#纠删码相关代码)
+		- [minio erasure:](#minio-erasure)
+		- [filecoin erasure:](#filecoin-erasure)
+		- [storj erasure:](#storj-erasure)
+		- [hadoop/glusterfs企业版本 erasure:](#hadoopglusterfs企业版本-erasure)
+			- [功能介绍](#功能介绍)
+			- [源码实现](#源码实现)
 	- [原型验证](#原型验证)
 	- [参考资料](#参考资料)
 
@@ -43,9 +49,10 @@ $$m_{k-1} x^{n-1} + \cdots + m_1x^{2t+1} + m_0x^{2t} + p_{2t-1}x^{2t-1} + \cdots
 
 
 
-
-
 ## 纠删码相关代码
+
+### minio erasure:
+基于github.com/klauspost/reedsolomon实现
 
 ```bash
 (base) ➜  codeshow git:(main) ✗ ls  http://github.com/minio/minio/cmd/erasure* 
@@ -81,7 +88,7 @@ http://github.com/minio/minio/cmd/erasure.go # 定义ER对象
 http://github.com/minio/minio/cmd/erasure_test.go # 测试代码
 ```
 
-github.com/klauspost/reedsolomon
+
 [纠删码入口](../../../../code/minio/cmd/erasure.go)
 定义ER对象
 ```go
@@ -129,16 +136,157 @@ type Erasure struct {
 	blockSize                int64
 }
 ```
+
+[数据对象](../../../../code/minio/cmd/erasure-object.go)
+定义了数据对象操作方法列表
+![数据对象操作方法列表](../assets/erasureObjects_operation.png)
+
+[数据集](../../../../code/minio/cmd/erasure-set.go)
+
+```go
+// setsDsyncLockers is encapsulated type for Close()
+type setsDsyncLockers [][]dsync.NetLocker
+
+// erasureSets implements ObjectLayer combining a static list of erasure coded
+// object sets. NOTE: There is no dynamic scaling allowed or intended in
+// current design.
+type erasureSets struct {
+	GatewayUnsupported
+
+	sets []*erasureObjects
+
+	// Reference format.
+	format *formatErasureV3
+	>>>>
+}
+	
+```
+
+[服务资源池](../../../../code/minio/cmd/erasure-server-pool.go)
+```go
+
+type erasureServerPools struct {
+	GatewayUnsupported
+
+	poolMetaMutex sync.RWMutex
+	poolMeta      poolMeta
+	serverPools   []*erasureSets
+
+	// Shut down async operations
+	shutdown context.CancelFunc
+
+	// Active decommission canceler
+	decommissionCancelers []context.CancelFunc
+}
+```
+
 [编码过程](../../../../code/minio/cmd/erasure-encode.go)
-
-
+关键数据结构parallelWriter，包括writers和quorum，其中quorum = erasure.dataBlocks+1
+```go
+// Encode reads from the reader, erasure-encodes the data and writes to the writers.
+func (e *Erasure) Encode(ctx context.Context, src io.Reader, writers []io.Writer, buf []byte, quorum int) (total int64, err error) {
+	writer := &parallelWriter{
+		writers:     writers,
+		writeQuorum: quorum,
+		errs:        make([]error, len(writers)),
+	}
+}
+```
 [解码过程](../../../../code/minio/cmd/erasure-decode.go)
 
+```go
+unc (e Erasure) Decode(ctx context.Context, writer io.Writer, readers []io.ReaderAt, offset, length, totalLength int64, prefer []bool) (written int64, derr error) {
+	if offset < 0 || length < 0 {
+		logger.LogIf(ctx, errInvalidArgument)
+		return -1, errInvalidArgument
+	}
+}
+```
 
 [元数据处理](../../../../code/minio/cmd/erasure-metadata.go)
+1. 元数据处理算法
+```go
+// Object was stored with additional erasure codes due to degraded system at upload time
+const minIOErasureUpgraded = "x-minio-internal-erasure-upgraded"
 
+const erasureAlgorithm = "rs-vandermonde"
+```
+2. 元数据结构
+```go
+// ToObjectInfo - Converts metadata to object info.
+func (fi FileInfo) ToObjectInfo(bucket, object string) ObjectInfo {
+	object = decodeDirObject(object)
+	versionID := fi.VersionID
+	if (globalBucketVersioningSys.Enabled(bucket) || globalBucketVersioningSys.Suspended(bucket)) && versionID == "" {
+		versionID = nullVersionID
+	}
 
-[解码过程](../../../../code/minio/cmd/erasure-healing.go)
+	objInfo := ObjectInfo{
+		IsDir:            HasSuffix(object, SlashSeparator),
+		Bucket:           bucket,
+		Name:             object,
+		VersionID:        versionID,
+		IsLatest:         fi.IsLatest,
+		DeleteMarker:     fi.Deleted,
+		Size:             fi.Size,
+		ModTime:          fi.ModTime,
+		Legacy:           fi.XLV1,
+		ContentType:      fi.Metadata["content-type"],
+		ContentEncoding:  fi.Metadata["content-encoding"],
+		NumVersions:      fi.NumVersions,
+		SuccessorModTime: fi.SuccessorModTime,
+	}
+```
+
+[数据恢复](../../../../code/minio/cmd/erasure-healing.go)
+
+### filecoin erasure:
+无公开资料显示支持纠删码
+
+### storj erasure:
+
+1. 文档（蓝皮书）：docs/blueprints/audit-v2.md
+2. 编码： https://github.com/storj/storj/blob/master/satellite/metainfo/endpoint.go
+3. 修复： https://github.com/storj/storj/blob/master/satellite/reparir/repairer/ec.go
+4. 
+
+### hadoop/glusterfs企业版本 erasure:
+1. 纠删码是hadoop3.x新加入的功能
+
+#### 功能介绍
+纠删码则可以在同等可用性的情况下，节省更多的空间，纠删码可以将HDFS的存储开销降低约50%，同时与三份副本策略一样，还可以保证数据的可用性。目前默认的纠删码策略一共有5种，包括RS-10-4-1024k，RS-3-2-1024k，RS-6-3-1024k，RS-LEGACY-6-3-1024k和XOR-2-1-1024k。
+
+以RS-6-3-1024K这种纠删码策略为例子,6份原始数据，编码后生成3份校验数据，一共9份数据，只要最终有6份数据存在，就可以得到原始数据，它可以容忍任意3份数据不可用.
+
+```bash
+#开启
+hdfs ec -enablePolicy -policy RS-3-2-1024k
+ 
+#禁用
+hdfs ec -disablePolicy -policy RS-3-2-1024k
+
+# 在HDFS创建目录，并设置/input擦除策略
+# 纠删码策略是与具体的路径（path）相关联的。也就是说，如果我们要使用纠删码，则要给一个具体的路径设置纠删码策略，后续，所有往此目录下存储的文件，都会执行此策略。默认只开启对RS-6-3-1024k策略的支持
+#目录创建
+hdfs dfs -mkdir /input
+ 
+#为input目录设置策略
+hdfs ec -setPolicy -path /input -policy RS-3-2-1024k
+ 
+#获取目录的纠删码策略
+hdfs ec -getPolicy -path /input
+
+```
+
+#### 源码实现
+https://github.com/apache/hadoop/hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/io/erasurecode/ECSchema.java
+
+2. glusterfs企业版本（红帽）
+
+在GlusterFS 3.6版本中发布了一种基于Erasure Code所开发的新类型卷Dispersed卷和Distributed Dispersed卷，简称EC卷，类似于RAID5/6。
+
+在GlusterFS存储中，有两种卷是基于erasure codes的，分别是Dispersed卷和Distributed Dispersed卷。其核心思想是以计算换容量，和RAID类似，同样突破了单盘容量的限制，且能够通过配置Redundancy（冗余）级别来提高数据的可靠性，也就是说存储系统底层不做RAID，使用EC卷就能提供大容量的存储空间，还能保证较高的存储可靠性。
+
 ## 原型验证
 
 
@@ -151,3 +299,11 @@ type Erasure struct {
 6. (C):https://github.com/randombit/botan.git
 7. (C):https://github.com/randombit/fecpp(不再维护)
 8. 【编码-纠错码】通信编码中的R-S编码方式：https://blog.csdn.net/rouranling/article/details/125159273
+9. Hadoop3.x新特性——纠删码（擦除编码）:http://www.kaotop.com/it/670922.html
+10. 应用AI芯片加速 Hadoop 3.0 纠删码的计算性能:https://www.bbsmax.com/A/kjdwLLqwzN/
+11. hadoop ec源码实现：https://github.com/apache/hadoop/hadoop-common-project
+12. GlusterFS企业级功能之EC纠删码: https://it.cha138.com/nginx/show-294671.html
+13. glusterfs ec源码实现：https://github.com/gluster/glusterfs/blob/master/xlators/features/erasure-code/src
+14. storj ec源码实现: https://github.com/storj/storj/blob/master/statellite/
+15. filecoin ec源码实现： https://github.com/filecoin-project/lotus/blob/master/build/ensure
+16. ipfs block code实现： https://github.com/ipfs/kubo/blob/master/vfs/src/encoding
