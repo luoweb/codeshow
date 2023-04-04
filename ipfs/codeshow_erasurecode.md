@@ -20,12 +20,21 @@
 <!-- /TOC -->
 
 ## 纠删码简介
+纠删码（erasure coding，EC）是一种数据保护方法，它将数据分割成片段，把冗余数据块扩展、编码，并将其存储在不同的位置，比如磁盘、存储节点或者其它地理位置。  
+> 纠删码码广泛用于数据存储（如CD）和传输应用中。在信道编码中，差错控制编码根据编码用途不同，可以分为检错码、纠错码和纠删码三种。 
+>> 检错码是为了校验数据经过信道传输后是否出现了错误，常用的检错码包括简单奇偶校验码、循环冗余校验码等。  
+>> 纠错码不仅可以识别到信道传输是否出现了错误，还能纠正传输错误。在纠错码看来，经过差错信道传输后，接收端收到的数据都是不可靠的，需要通过解码来发现和纠正错误。前向纠错（Forward Error Correction ，简称FEC）或信道编码是一种用于在不可靠或有噪声的通信信道上控制数据传输错误的技术。中心思想是发送者以冗余的方式对消息进行编码，通常使用纠错码（Error Correction Code，简称ECC）。常见的纠错码包括海明码（Hamming Code）、BCH码等.  
+>> 纠删码可以认为是一种特殊的纠错码，对于纠删码来说，其差错信道是一种删除信道，对接收者来说错误的位置是已知的，并且收到的数据都认为是正确的，因此其编译码会比纠错码更容易一些。   
+示例,QR码采用纠错算法生成一系列纠错码字，添加在数据码字序列之后，使得符号可以在遇到损坏时可以恢复。QR 码的纠错使用 Reed–Solomon 编码
+![纠删码入口](../assets/qr_symbols.png)
+RS码是一种纠错性能很强的线性纠错码，一类重要的线性分组码，也是一种性能优异的短码，工作在有限域上，能够纠正随机错误和突发错误. RS编码会将需要编码的流数据重新排列为以「符号(symbol)」为单位的数据块,如下图所示：
+![纠删码入口](../assets/rs_symbols.png)
+以RS（544，514，15，10）表示方式举例，每个符号Symbol数据位宽位10位（m=10bits），原始数据为514个符号（k=514），校验数据为30个Symbol（t=15），最终编码完成后符号总数为544个Symbol（n=544）。
 
-
-公式： $\sqrt{x^2+y^2}$
-IEEE 802.3 119.2.4.6中定义了编码的算法：
-
-区块链数据分块采用多项式表示：原始数据块k,校验块m(2t=m=4)
+ 线性分组码通常用(n,k)码来表示，对于位编码来说，k和n表示比特数，其中k为信息位个数，n为码长；对于码长为n的RS纠删码来说，只要收到任意k个信息位，就可以解码出所有n个数据。
+	对于一个(n,k)线性纠删码，可以表示为如下的矩阵运算： Y = x * G
+其中，x是信息位向量，y是码字向量，G是生成矩阵。 在RS码中，常见的生成矩阵有范德蒙矩阵和柯西矩阵，分别如下图所示，这两种矩阵的特点是任意子矩阵均可逆，因此总能利用任意k个接收码字来解码出剩余n-k个码字。 
+RS码通过生成(irreducible generator)和分解(dividing)多项式来表达信息，分解余下的多项式(remainder)就是RS码, IEEE 802.3 119.2.4.6中定义了编码的算法：数据分块采用多项式表示：原始数据块m,校验块k(2t=m=4)，经过编码后的数据为Symbol(m + k )，表示如下：
 
 $$(m_{k-1} x^{k-1} + \cdots + m_1x + m_0) \times x^{2t}$$
 
@@ -35,7 +44,7 @@ $$m_{k-1} x^{n-1} + \cdots + m_1x^{2t+1} + m_0x^{2t} + 0x^{2t-1} + \cdots + 0x +
 <!-- $$ \sum_{i=1}^n \frac{1}{i^2}$$ -->
 <!-- $$ g(x) = \prod_{j=0}^{2t-1} \frac{1}{i^2}$$ -->
 
-生成多项式g(x)的生成如下：
+生成多项式g(x)的(生成多项式(generator polynomial)就是我们编码用的字典，而用它除原信息多项式的运算就是我们加密（RS编码）的过程)如下：
 
 $$ g(x) = \frac{1}{\vec{a}}\prod_{j=0}^{2t-1} (x - a^j) = \frac{1}{\vec{a}} (g_{2t}x^{2t} + \cdot + g_1x + g_0)$$
 
@@ -45,7 +54,6 @@ $$m_{k-1} x^{n-1} + \cdots + m_1x^{2t+1} + m_0x^{2t} + p_{2t-1}x^{2t-1} + \cdots
 
 <!-- 如果传输过程没有任何错误，那么接收到的编码数据块多项式去除生成多项式  是可以整除、没有余数的，如下图所示： -->
 $$m_{k-1} x^{n-1} + \cdots + m_1x^{2t+1} + m_0x^{2t} + p_{2t-1}x^{2t-1} + \cdots + p_1x +p_0 \div \prod_{j=0}^{2t-1} (x - a^j) = \vec{a}$$
-
 
 
 
@@ -288,7 +296,14 @@ https://github.com/apache/hadoop/hadoop-common-project/hadoop-common/src/main/ja
 在GlusterFS存储中，有两种卷是基于erasure codes的，分别是Dispersed卷和Distributed Dispersed卷。其核心思想是以计算换容量，和RAID类似，同样突破了单盘容量的限制，且能够通过配置Redundancy（冗余）级别来提高数据的可靠性，也就是说存储系统底层不做RAID，使用EC卷就能提供大容量的存储空间，还能保证较高的存储可靠性。
 
 ## 原型验证
+1. IPFS数据数据分块实现：
 
+ 
+2. RS纠删码技术实力
+   https://github.com/klauspost/reedsolomon
+
+
+3. IPFS集成纠删码思考
 
 ## 参考资料
 1. minio纠删码(golang)：https://github.com/minio/minio/tree/master/docs/erasure
@@ -299,11 +314,18 @@ https://github.com/apache/hadoop/hadoop-common-project/hadoop-common/src/main/ja
 6. (C):https://github.com/randombit/botan.git
 7. (C):https://github.com/randombit/fecpp(不再维护)
 8. 【编码-纠错码】通信编码中的R-S编码方式：https://blog.csdn.net/rouranling/article/details/125159273
-9. Hadoop3.x新特性——纠删码（擦除编码）:http://www.kaotop.com/it/670922.html
-10. 应用AI芯片加速 Hadoop 3.0 纠删码的计算性能:https://www.bbsmax.com/A/kjdwLLqwzN/
-11. hadoop ec源码实现：https://github.com/apache/hadoop/hadoop-common-project
-12. GlusterFS企业级功能之EC纠删码: https://it.cha138.com/nginx/show-294671.html
-13. glusterfs ec源码实现：https://github.com/gluster/glusterfs/blob/master/xlators/features/erasure-code/src
-14. storj ec源码实现: https://github.com/storj/storj/blob/master/statellite/
-15. filecoin ec源码实现： https://github.com/filecoin-project/lotus/blob/master/build/ensure
-16. ipfs block code实现： https://github.com/ipfs/kubo/blob/master/vfs/src/encoding
+9. **<u>理解FEC（Reed-Solomon）编码</u>** https://zhuanlan.zhihu.com/p/103888948
+10. **<u>为程序员写的Reed-Solomon码解释</u>** https://www.jianshu.com/p/8208aad537bb
+11. reedsolo代码实现：https://pypi.python.org/pypi/reedsolo
+12. Reed Solomon Encoder/Decoder on the StarCore™ SC140/SC1400 Cores,With Extended Examples: https://www.nxp.com/docs/en/application-note/AN2407.pdf
+13. Reed–Solomon 编码: Reed-Solomon-error-correction: http://downloads.bbc.co.uk/rd/pubs/whp/whp-pdf-files/WHP031.pdf
+14. http://article.iotxfd.cn/RFID/Reed%20Solomon%20Codes
+15. Hadoop3.x新特性——纠删码（擦除编码）:http://www.kaotop.com/it/670922.html
+16. 应用AI芯片加速 Hadoop 3.0 纠删码的计算性能:https://www.bbsmax.com/A/kjdwLLqwzN/
+17. hadoop ec源码实现：https://github.com/apache/hadoop/hadoop-common-project
+18. GlusterFS企业级功能之EC纠删码: https://it.cha138.com/nginx/show-294671.html
+19. glusterfs ec源码实现：https://github.com/gluster/glusterfs/blob/master/xlators/features/erasure-code/src
+20. storj ec源码实现: https://github.com/storj/storj/blob/master/satellite/
+21. filecoin ec源码实现： https://github.com/filecoin-project/lotus/blob/master/build/ensure
+22. ipfs block code实现： https://github.com/ipfs/kubo/blob/master/vfs/src/encoding
+
